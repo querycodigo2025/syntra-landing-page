@@ -1,67 +1,59 @@
 import './style.css'
 
-// Scroll Reveal Logic
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-}
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
+// ── SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      io.unobserve(e.target);
     }
   });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => io.observe(el));
 
-document.querySelectorAll('.reveal').forEach(el => {
-  revealObserver.observe(el);
-});
+// ── HEADER SCROLL
+const header = document.querySelector('header');
+if (header) {
+  window.addEventListener('scroll', () => {
+    header.style.padding = window.scrollY > 60 ? '12px 0' : '20px 0';
+    header.style.background = window.scrollY > 60 ? 'rgba(5, 5, 8, 0.95)' : 'rgba(5, 5, 8, 0.8)';
+  });
+}
 
-// Navbar background change on scroll
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    if (window.scrollY > 50) {
-      navbar.style.background = 'rgba(5, 5, 8, 0.95)';
-      navbar.style.padding = '1rem 0';
-    } else {
-      navbar.style.background = 'rgba(5, 5, 8, 0.8)';
-      navbar.style.padding = '1.5rem 0';
-    }
-  }
-});
-
-// Marketing Event Tracking Helpers
-window.trackEvent = (eventName, params = {}) => {
-  console.log(`Tracking Event: ${eventName}`, params);
-  
-  // Facebook Pixel
-  if (window.fbq) {
-    window.fbq('track', eventName, params);
-  }
-  
-  // Google Analytics
-  if (window.gtag) {
-    window.gtag('event', eventName, params);
+// ── TRACKING HELPERS
+window.trackMeta = (event, data) => {
+  console.log(`[META TRACK] ${event}`, data);
+  if (typeof fbq !== 'undefined') {
+    fbq('track', event, data || {});
   }
 };
 
-// WhatsApp Click Tracking
+// ── SCROLL & TIME TRACKING
+let tracked50 = false;
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  if (pct > 0.5 && !tracked50) { 
+    window.trackMeta('ViewContent', {content_name: 'scroll_50pct'}); 
+    tracked50 = true; 
+  }
+});
+
+setTimeout(() => window.trackMeta('ViewContent', {content_name: 'time_30s'}), 30000);
+
+// ── WHATSAPP CLICKS
 document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
   link.addEventListener('click', () => {
-    window.trackEvent('Contact', {
-      method: 'WhatsApp',
-      location: link.classList.contains('wpp-floating') ? 'Floating Button' : 'Page Link'
-    });
+    const location = link.classList.contains('floating-wpp') ? 'floating' : 'page';
+    window.trackMeta('Contact', {content_name: `whatsapp_${location}`});
   });
 });
 
-// VSL Play Interaction (Placeholder)
-const vslPlay = document.querySelector('.play-btn');
+// ── VSL INTERACTIONS
+const vslPlay = document.querySelector('.vsl-play');
 if (vslPlay) {
   vslPlay.addEventListener('click', () => {
-    window.trackEvent('ViewContent', { content_name: 'VSL' });
-    alert('Aqui será carregado o vídeo VSL assim que o link estiver disponível.');
+    window.trackMeta('ViewContent', {content_name: 'vsl_play'});
+    alert('O vídeo VSL será carregado aqui assim que o link estiver disponível.');
   });
 }

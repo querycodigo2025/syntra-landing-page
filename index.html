@@ -1,172 +1,380 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- SEO Tags -->
-    <title>Syntra — IA Comercial: Atenda, Qualifique e Venda no WhatsApp 24/7</title>
-    <meta name="description" content="A Syntra utiliza Inteligência Artificial de ponta para automatizar o atendimento da sua empresa, qualificar leads em tempo real e aumentar suas conversões no WhatsApp. Atendimento inteligente 24 horas por dia." />
-    <meta name="keywords" content="Syntra, IA Comercial, Inteligência Artificial WhatsApp, Automação de Vendas, Chatbot Inteligente, Qualificação de Leads" />
-    <link rel="canonical" href="https://go.usesyntra.xyz" />
-    
-    <!-- OpenGraph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://go.usesyntra.xyz" />
-    <meta property="og:title" content="Syntra — IA Comercial que Vende por Você" />
-    <meta property="og:description" content="Recupere vendas perdidas e automatize seu atendimento com a IA mais avançada para WhatsApp." />
-    <meta property="og:image" content="/og-image.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Tags -->
+  <title>Syntra — IA Comercial: Atenda, Qualifique e Vende no WhatsApp 24/7</title>
+  <meta name="description" content="A Syntra utiliza Inteligência Artificial de ponta para automatizar o atendimento da sua empresa, qualificar leads em tempo real e aumentar suas conversões no WhatsApp." />
+  <meta name="keywords" content="Syntra, IA Comercial, Inteligência Artificial WhatsApp, Automação de Vendas, Chatbot Inteligente, Qualificação de Leads" />
+  
+  <!-- OpenGraph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Syntra — IA Comercial que Vende por Você" />
+  <meta property="og:description" content="Atendimento inteligente 24h por dia no WhatsApp. Qualifique e converta leads automaticamente." />
+  <meta property="og:image" content="/og-image.png" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://go.usesyntra.xyz" />
-    <meta property="twitter:title" content="Syntra — IA Comercial que Vende por Você" />
-    <meta property="twitter:description" content="Atendimento inteligente 24h por dia no WhatsApp. Qualifique e converta leads automaticamente." />
-    <meta property="twitter:image" content="/og-image.png" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Facebook Pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_PLACEHOLDER');
+    fbq('track', 'PageView');
 
-    <!-- Marketing Tags Placeholders -->
-    <!-- [GOOGLE ANALYTICS] -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> 
-    -->
+    window.trackMeta = function(event, data) {
+      if(typeof fbq !== 'undefined') fbq('track', event, data || {});
+    };
+  </script>
+</head>
+<body>
 
-    <!-- [GOOGLE ADS] -->
-    <!-- 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'AW-XXXXXXXXXX');
-    </script>
-    -->
+  <!-- FLOATING WHATSAPP -->
+  <a class="floating-wpp" href="https://wa.me/5548988018690?text=Quero+ativar+a+Syntra+na+minha+empresa"
+     target="_blank" rel="noopener"
+     onclick="trackMeta('Contact', {content_name: 'floating_whatsapp'})">
+    <div class="wpp-pulse"></div>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+    <span>Falar no WhatsApp</span>
+  </a>
 
-    <!-- [FACEBOOK PIXEL] -->
-    <script>
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'PIXEL_ID_PLACEHOLDER');
-      fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_PLACEHOLDER&ev=PageView&noscript=1"/></noscript>
-
-  </head>
-  <body>
-    <div id="app">
-      <!-- Floating WhatsApp -->
-      <a href="https://wa.me/5548988018690?text=Quero+saber+mais+sobre+a+Syntra" class="wpp-floating" target="_blank" rel="noopener">
-        <div class="wpp-pulse"></div>
-        <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
-      </a>
-
-      <!-- Navbar -->
-      <nav class="navbar">
-        <div class="container">
-          <div class="logo">SYNTR<span>A</span></div>
-          <a href="https://wa.me/5548988018690?text=Quero+ativar+a+Syntra+na+minha+empresa" class="btn btn-navbar">Ativar IA agora</a>
-        </div>
-      </nav>
-
-      <!-- Hero Section -->
-      <section class="hero">
-        <div class="container">
-          <div class="hero-content">
-            <span class="badge">Lançamento Exclusivo 2026</span>
-            <h1 class="reveal">O fim das <span class="text-gradient">vendas perdidas</span> por falta de atendimento.</h1>
-            <p class="reveal">A Syntra atende, qualifica e vende para cada lead que chega no seu WhatsApp. Em escala humana, 24 horas por dia.</p>
-            <div class="hero-btns reveal">
-              <a href="https://wa.me/5548988018690?text=Quero+ver+a+Syntra+funcionando" class="btn btn-primary">Quero ver funcionando</a>
-              <a href="#vsl" class="btn btn-secondary">Conheça a tecnologia</a>
-            </div>
-          </div>
-          <div class="hero-visual reveal">
-            <div class="glass-card">
-              <div class="card-header">
-                <div class="dot red"></div>
-                <div class="dot yellow"></div>
-                <div class="dot green"></div>
-                <span class="status">Syntra IA: Ativa</span>
-              </div>
-              <div class="chat-sim">
-                <div class="message in">Olá! Qual o valor do plano?</div>
-                <div class="message out">Olá! Sou a Syntra, IA da empresa. Temos planos a partir de R$ 497. Qual o tamanho da sua operação hoje?</div>
-                <div class="message in">Atendemos uns 50 leads por dia.</div>
-                <div class="message out">Perfeito! O plano Enterprise é o ideal para você. Consigo liberar um teste gratuito, quer tentar?</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- VSL Section -->
-      <section id="vsl" class="vsl-section">
-        <div class="container text-center">
-          <h2 class="reveal">Entenda como a Syntra vai <span class="text-gradient">dobrar sua conversão</span></h2>
-          <div class="vsl-container reveal">
-            <div class="vsl-placeholder">
-              <div class="play-btn">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M8 5v14l11-7z"/></svg>
-              </div>
-              <p>O vídeo VSL será exibido aqui</p>
-            </div>
-          </div>
-          <a href="https://wa.me/5548988018690?text=Quero+essa+IA+no+meu+comercial" class="btn btn-primary mt-4 reveal">Garantir acesso imediato</a>
-        </div>
-      </section>
-
-      <!-- Features Section -->
-      <section class="features">
-        <div class="container">
-          <div class="grid-3">
-            <div class="feature-card reveal">
-              <div class="icon">⚡</div>
-              <h3>Atendimento Instantâneo</h3>
-              <p>Nenhum lead espera mais de 3 segundos para ser atendido. Velocidade é conversão.</p>
-            </div>
-            <div class="feature-card reveal">
-              <div class="icon">🧠</div>
-              <h3>Qualificação Humana</h3>
-              <p>Nossa IA entende o contexto e qualifica o lead antes de passar para o fechamento.</p>
-            </div>
-            <div class="feature-card reveal">
-              <div class="icon">📈</div>
-              <h3>Escala Infinita</h3>
-              <p>Atenda 1 ou 10.000 clientes ao mesmo tempo com o mesmo nível de qualidade.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer>
-        <div class="container text-center">
-          <div class="logo">SYNTR<span>A</span></div>
-          <p>© 2026 Syntra IA. Todos os direitos reservados.</p>
-          <div class="footer-links">
-            <a href="#">Termos de Uso</a>
-            <a href="#">Privacidade</a>
-          </div>
-        </div>
-      </footer>
+  <!-- HEADER -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="/src/assets/logo.png" alt="Syntra Logo" class="logo-img">
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="https://wa.me/5548988018690?text=Quero+ver+a+Syntra+funcionando"
+           target="_blank" onclick="trackMeta('Lead', {content_name: 'header_cta'})">
+          Ativar IA agora
+        </a>
+      </div>
     </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+  </header>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-tag reveal">
+            <span class="tag">⚡ Inteligência Artificial Comercial</span>
+          </div>
+          <h1 class="hero-headline reveal">
+            Sua empresa está<br>
+            <span class="line-highlight">perdendo clientes</span><br>
+            todos os dias
+          </h1>
+          <p class="hero-sub reveal">
+            A Syntra usa Inteligência Artificial para <strong>atender, qualificar e converter clientes</strong> automaticamente — 24 horas por dia, 7 dias por semana, no WhatsApp.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-wpp"
+               href="https://wa.me/5548988018690?text=Quero+ver+a+Syntra+funcionando"
+               target="_blank"
+               onclick="trackMeta('ViewContent', {content_name: 'hero_ver_funcionando'})">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+              Quero ver funcionando
+            </a>
+            <a class="btn btn-gold"
+               href="https://wa.me/5548988018690?text=Quero+ativar+minha+IA+agora"
+               target="_blank"
+               onclick="trackMeta('InitiateCheckout', {content_name: 'hero_ativar'})">
+              Ativar minha IA agora →
+            </a>
+          </div>
+        </div>
+        <div class="hero-stats reveal">
+          <div class="stat"><div class="stat-num">24H</div><div class="stat-label">Atendimento ininterrupto</div></div>
+          <div class="stat"><div class="stat-num">+4x</div><div class="stat-label">Mais leads qualificados</div></div>
+          <div class="stat"><div class="stat-num">0</div><div class="stat-label">Clientes sem resposta</div></div>
+          <div class="stat"><div class="stat-num">100</div><div class="stat-label">Conversas simultâneas</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- VSL -->
+  <section id="vsl">
+    <div class="container">
+      <div class="vsl-label reveal">📽 Assista antes de decidir</div>
+      <div class="vsl-copy reveal">
+        <h2>Veja em <em>2 minutos</em> como empresas estão automatizando atendimento e aumentando vendas com IA</h2>
+      </div>
+      <div class="vsl-frame reveal">
+        <div class="vsl-placeholder">
+          <button class="vsl-play" onclick="trackMeta('ViewContent', {content_name: 'vsl_play'})">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="vsl-duration">▶ 2:14 min — Como a Syntra funciona na prática</div>
+        </div>
+      </div>
+      <div class="vsl-checklist reveal">
+        <div class="vcheck">Atendimento automático 24h</div>
+        <div class="vcheck">Respostas inteligentes com contexto</div>
+        <div class="vcheck">Qualificação de leads em tempo real</div>
+        <div class="vcheck">Integração nativa com WhatsApp</div>
+        <div class="vcheck">Envia e-mails automáticos</div>
+      </div>
+      <div class="vsl-cta reveal">
+        <a class="btn btn-wpp"
+           href="https://wa.me/5548988018690?text=Quero+essa+automacao+na+minha+empresa"
+           target="_blank"
+           onclick="trackMeta('Lead', {content_name: 'vsl_cta'})">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+          Quero essa automação na minha empresa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- AUTHORITY -->
+  <section id="authority">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Tecnologia de Ponta</span>
+        <h2 style="margin-top:20px">Não é <span class="accent">chatbot.</span><br>É inteligência comercial.</h2>
+        <p>A Syntra não responde apenas perguntas. Ela entende intenção, conduz a conversa e fecha oportunidades.</p>
+      </div>
+      <div class="auth-grid reveal">
+        <div class="auth-card">
+          <div class="auth-icon">🎯</div>
+          <h3>Atende</h3>
+          <p>Responde instantaneamente qualquer cliente no WhatsApp, 24h por dia, com linguagem natural e contextualizada.</p>
+        </div>
+        <div class="auth-card">
+          <div class="auth-icon">🧠</div>
+          <h3>Qualifica</h3>
+          <p>Entende a intenção do cliente, coleta informações e identifica automaticamente se é um lead quente.</p>
+        </div>
+        <div class="auth-card">
+          <div class="auth-icon">💰</div>
+          <h3>Vende</h3>
+          <p>Conduz a conversa com técnicas de vendas, contorna objeções e avança o lead para o fechamento.</p>
+        </div>
+        <div class="auth-card">
+          <div class="auth-icon">📧</div>
+          <h3>Envia E-mail</h3>
+          <p>Dispara e-mails personalizados automaticamente após cada interação — follow-up, proposta, confirmação.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- PAIN -->
+  <section id="pain">
+    <div class="container">
+      <div class="pain-grid">
+        <div class="pain-text reveal">
+          <span class="tag pain-tag">⚠️ O problema real</span>
+          <h2 style="margin-top:20px">Se você depende de atendimento manual, você está<br><span class="accent">perdendo dinheiro.</span></h2>
+          <p>Cada minuto sem resposta é um cliente indo para o concorrente. A realidade do atendimento manual é brutal.</p>
+        </div>
+        <div class="pain-list reveal">
+          <div class="pain-item">
+            <div class="pain-x">✗</div>
+            <div class="pain-item-text">
+              <h4>Clientes sem resposta</h4>
+              <p>Mensagens acumulando enquanto sua equipe está ocupada ou dormindo.</p>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-x">✗</div>
+            <div class="pain-item-text">
+              <h4>Demora no atendimento</h4>
+              <p>Clientes esperam horas ou dias. Quando você responde, já compraram de outro.</p>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-x">✗</div>
+            <div class="pain-item-text">
+              <h4>Leads esfriando</h4>
+              <p>O interesse some rápido. Sem follow-up imediato, a venda não acontece.</p>
+            </div>
+          </div>
+          <div class="pain-item">
+            <div class="pain-x">✗</div>
+            <div class="pain-item-text">
+              <h4>Equipe sobrecarregada</h4>
+              <p>Sua equipe gasta energia repetindo as mesmas respostas em vez de fechar negócios.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- SOLUTION -->
+  <section id="solution">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">✅ A Solução</span>
+        <h2 style="margin-top:20px">A Syntra resolve isso<br><span class="accent">automaticamente.</span></h2>
+        <p>Um fluxo completo de atendimento inteligente, do primeiro contato ao fechamento.</p>
+      </div>
+      <div class="solution-flow reveal">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-icon">💬</div>
+          <h3>IA Atende</h3>
+          <p>Responde na hora, em linguagem natural, sem deixar nenhum cliente esperando.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-icon">🧠</div>
+          <h3>IA Entende</h3>
+          <p>Analisa a intenção, o contexto e o momento de compra de cada cliente.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-icon">🎯</div>
+          <h3>IA Qualifica</h3>
+          <p>Separa leads frios de quentes e direciona o esforço da equipe com precisão.</p>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-icon">🚀</div>
+          <h3>IA Converte</h3>
+          <p>Conduz o lead até o fechamento e dispara e-mails automáticos de follow-up.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- RESULT -->
+  <section id="result">
+    <div class="container">
+      <div class="result-banner reveal">
+        <div class="big-stat">100x</div>
+        <h3>Mais capacidade. Sem aumentar sua equipe.</h3>
+        <p>A Syntra pode substituir de <strong>4 a 100 funcionários</strong> de atendimento — atendendo centenas de clientes simultaneamente, sem pausas, sem erros, sem custo fixo por funcionário.</p>
+      </div>
+      <div class="result-cards reveal">
+        <div class="rcard"><div class="rnum">↑ 300%</div><p>Aumento médio em leads qualificados</p></div>
+        <div class="rcard"><div class="rnum">0s</div><p>Tempo de espera para o primeiro contato</p></div>
+        <div class="rcard"><div class="rnum">-70%</div><p>Redução no custo de atendimento</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- PROOF -->
+  <section id="proof">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">📱 Prova Real</span>
+        <h2 style="margin-top:20px">Veja a Syntra<br><span class="accent">em ação</span></h2>
+        <p>Conversas reais, resultados reais. Veja como a IA atende e converte no WhatsApp.</p>
+      </div>
+      <div class="proof-grid reveal">
+        <!-- Card 1 -->
+        <div class="proof-card">
+          <div class="wpp-header">
+            <div class="wpp-avatar">S</div>
+            <div><div class="wpp-name">Syntra IA — Clínica Estética</div><div class="wpp-status">● Online agora</div></div>
+          </div>
+          <div class="wpp-body">
+            <div class="msg msg-in">Oi, vocês fazem harmonização facial?<div class="msg-time">14:02</div></div>
+            <div class="msg msg-out">Olá! Sim, realizamos harmonização facial com os melhores profissionais 😊 Você já tem algum procedimento em mente ou prefere uma avaliação completa?<div class="msg-time">14:02 ✓✓</div></div>
+            <div class="msg msg-in">Queria avaliar, quanto custa?<div class="msg-time">14:03</div></div>
+            <div class="msg msg-out">Ótimo! A avaliação é gratuita e personalizada. Consigo agendar para você essa semana — tem preferência de dia ou horário?<div class="msg-time">14:03 ✓✓</div></div>
+          </div>
+          <div class="syntra-badge">🤖 <span>Atendido por</span> <strong>Syntra IA</strong></div>
+        </div>
+        <!-- Card 2 -->
+        <div class="proof-card">
+          <div class="wpp-header">
+            <div class="wpp-avatar">S</div>
+            <div><div class="wpp-name">Syntra IA — Escritório Jurídico</div><div class="wpp-status">● Online agora</div></div>
+          </div>
+          <div class="wpp-body">
+            <div class="msg msg-in">Preciso de um advogado trabalhista urgente<div class="msg-time">09:15</div></div>
+            <div class="msg msg-out">Entendo! Estou aqui para ajudar. Pode me contar brevemente o que aconteceu? Assim já direciono para o especialista certo da nossa equipe.<div class="msg-time">09:15 ✓✓</div></div>
+            <div class="msg msg-in">Fui demitido sem justa causa e não recebi FGTS<div class="msg-time">09:16</div></div>
+            <div class="msg msg-out">Isso é sério e você tem direitos importantes a garantir! Já identifiquei o especialista ideal. Posso agendar uma consulta hoje às 15h ou amanhã de manhã. Qual prefere?<div class="msg-time">09:16 ✓✓</div></div>
+          </div>
+          <div class="syntra-badge">🤖 <span>Atendido por</span> <strong>Syntra IA</strong></div>
+        </div>
+        <!-- Card 3 -->
+        <div class="proof-card">
+          <div class="wpp-header">
+            <div class="wpp-avatar">S</div>
+            <div><div class="wpp-name">Syntra IA — Imobiliária</div><div class="wpp-status">● Online agora</div></div>
+          </div>
+          <div class="wpp-body">
+            <div class="msg msg-in">Vi o apartamento de 2 quartos no Instagram<div class="msg-time">22:47</div></div>
+            <div class="msg msg-out">Que ótimo que você viu! 🏠 Esse é um dos nossos destaques do momento. Para te enviar os detalhes certos, me diz: você prefere financiar ou tem interesse em compra à vista?<div class="msg-time">22:47 ✓✓</div></div>
+            <div class="msg msg-in">Tenho interesse em financiar, qual o valor?<div class="msg-time">22:48</div></div>
+            <div class="msg msg-out">Perfeito! Apartamento de R$ 380.000 — com entrada a partir de R$ 38.000. Consigo simular agora e já verificar as melhores condições para seu perfil. Posso prosseguir?<div class="msg-time">22:48 ✓✓</div></div>
+          </div>
+          <div class="syntra-badge">🤖 <span>Atendido por</span> <strong>Syntra IA</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="glow-divider"></div>
+
+  <!-- CTA FINAL -->
+  <section id="cta-final">
+    <div class="container">
+      <div class="reveal">
+        <span class="tag">🚀 Decisão Final</span>
+        <h2 style="margin-top:28px">
+          Ou você <span class="accent">automatiza…</span>
+          <span class="or">ou</span>
+          continua perdendo clientes.
+        </h2>
+        <p>Cada dia sem a Syntra é mais um dia de clientes sem resposta, leads esfriando e dinheiro escapando. A decisão é agora.</p>
+        <div class="cta-actions">
+          <a class="btn btn-wpp"
+             href="https://wa.me/5548988018690?text=Quero+ativar+minha+IA+agora"
+             target="_blank"
+             onclick="trackMeta('Purchase', {content_name: 'final_cta', value: 1, currency: 'BRL'})">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+            Ativar minha IA agora
+          </a>
+          <a class="btn btn-primary" href="https://wa.me/5548988018690?text=Quero+conhecer+melhor+a+Syntra" target="_blank">
+            Conhecer a Syntra →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="logo-footer">
+        <img src="/src/assets/logo.png" alt="Syntra Logo" class="logo-img-small">
+      </div>
+      <p>© 2026 <a href="https://usesyntra.xyz/" target="_blank">Syntra</a> — Inteligência Artificial para negócios reais.</p>
+      <p style="margin-top:10px; font-size:11px; opacity:0.5">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
