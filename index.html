@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Facebook Pixel -->
+  <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -30,12 +30,24 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', 'PIXEL_ID_PLACEHOLDER');
+    fbq('init', '1729913561773837');
     fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1729913561773837&ev=PageView&noscript=1"/>
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
-    window.trackMeta = function(event, data) {
-      if(typeof fbq !== 'undefined') fbq('track', event, data || {});
-    };
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17046996058"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'AW-17046996058');
+    gtag('config', 'G-J7ZF2L98V2');
   </script>
 </head>
 <body>
@@ -43,7 +55,7 @@
   <!-- FLOATING WHATSAPP -->
   <a class="floating-wpp" href="https://wa.me/5548988018690?text=Quero+ativar+a+Syntra+na+minha+empresa"
      target="_blank" rel="noopener"
-     onclick="trackMeta('Contact', {content_name: 'floating_whatsapp'})">
+     onclick="trackEvent('Contact', {content_name: 'floating_whatsapp'})">
     <div class="wpp-pulse"></div>
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
     <span>Falar no WhatsApp</span>
@@ -56,8 +68,13 @@
         <img src="/src/assets/logo.png" alt="Syntra Logo" class="logo-img">
       </div>
       <div class="nav-cta">
+        <div class="lang-selector">
+          <button class="lang-btn active" data-lang="pt">PT</button>
+          <span class="lang-sep">|</span>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
         <a class="btn btn-primary" href="https://wa.me/5548988018690?text=Quero+ver+a+Syntra+funcionando"
-           target="_blank" onclick="trackMeta('Lead', {content_name: 'header_cta'})">
+           target="_blank" onclick="trackEvent('Lead', {content_name: 'header_cta'})" data-i18n="header_btn">
           Ativar IA agora
         </a>
       </div>
@@ -84,23 +101,22 @@
             <a class="btn btn-wpp"
                href="https://wa.me/5548988018690?text=Quero+ver+a+Syntra+funcionando"
                target="_blank"
-               onclick="trackMeta('ViewContent', {content_name: 'hero_ver_funcionando'})">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+               onclick="trackEvent('ViewContent', {content_name: 'hero_ver_funcionando'})" data-i18n="hero_btn_ver">
               Quero ver funcionando
             </a>
             <a class="btn btn-gold"
                href="https://wa.me/5548988018690?text=Quero+ativar+minha+IA+agora"
                target="_blank"
-               onclick="trackMeta('InitiateCheckout', {content_name: 'hero_ativar'})">
+               onclick="trackEvent('InitiateCheckout', {content_name: 'hero_ativar'})" data-i18n="hero_btn_ativar">
               Ativar minha IA agora →
             </a>
           </div>
         </div>
         <div class="hero-stats reveal">
-          <div class="stat"><div class="stat-num">24H</div><div class="stat-label">Atendimento ininterrupto</div></div>
-          <div class="stat"><div class="stat-num">+4x</div><div class="stat-label">Mais leads qualificados</div></div>
-          <div class="stat"><div class="stat-num">0</div><div class="stat-label">Clientes sem resposta</div></div>
-          <div class="stat"><div class="stat-num">100</div><div class="stat-label">Conversas simultâneas</div></div>
+          <div class="stat"><div class="stat-num">24H</div><div class="stat-label" data-i18n="stat_24h">Atendimento ininterrupto</div></div>
+          <div class="stat"><div class="stat-num">+4x</div><div class="stat-label" data-i18n="stat_4x">Mais leads qualificados</div></div>
+          <div class="stat"><div class="stat-num">0</div><div class="stat-label" data-i18n="stat_0">Clientes sem resposta</div></div>
+          <div class="stat"><div class="stat-num">100</div><div class="stat-label" data-i18n="stat_100">Conversas simultâneas</div></div>
         </div>
       </div>
     </div>
@@ -111,31 +127,30 @@
   <!-- VSL -->
   <section id="vsl">
     <div class="container">
-      <div class="vsl-label reveal">📽 Assista antes de decidir</div>
+      <div class="vsl-label reveal" data-i18n="vsl_label">📽 Assista antes de decidir</div>
       <div class="vsl-copy reveal">
-        <h2>Veja em <em>2 minutos</em> como empresas estão automatizando atendimento e aumentando vendas com IA</h2>
+        <h2 data-i18n="vsl_headline">Veja em <em>2 minutos</em> como empresas estão automatizando atendimento e aumentando vendas com IA</h2>
       </div>
       <div class="vsl-frame reveal">
         <div class="vsl-placeholder">
-          <button class="vsl-play" onclick="trackMeta('ViewContent', {content_name: 'vsl_play'})">
+          <button class="vsl-play" onclick="trackEvent('ViewContent', {content_name: 'vsl_play'})">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
           </button>
           <div class="vsl-duration">▶ 2:14 min — Como a Syntra funciona na prática</div>
         </div>
       </div>
       <div class="vsl-checklist reveal">
-        <div class="vcheck">Atendimento automático 24h</div>
-        <div class="vcheck">Respostas inteligentes com contexto</div>
-        <div class="vcheck">Qualificação de leads em tempo real</div>
-        <div class="vcheck">Integração nativa com WhatsApp</div>
-        <div class="vcheck">Envia e-mails automáticos</div>
+        <div class="vcheck" data-i18n="vsl_check1">Atendimento automático 24h</div>
+        <div class="vcheck" data-i18n="vsl_check2">Respostas inteligentes com contexto</div>
+        <div class="vcheck" data-i18n="vsl_check3">Qualificação de leads em tempo real</div>
+        <div class="vcheck" data-i18n="vsl_check4">Integração nativa com WhatsApp</div>
+        <div class="vcheck" data-i18n="vsl_check5">Envia e-mails automáticos</div>
       </div>
       <div class="vsl-cta reveal">
         <a class="btn btn-wpp"
            href="https://wa.me/5548988018690?text=Quero+essa+automacao+na+minha+empresa"
            target="_blank"
-           onclick="trackMeta('Lead', {content_name: 'vsl_cta'})">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+           onclick="trackEvent('Lead', {content_name: 'vsl_cta'})" data-i18n="vsl_cta">
           Quero essa automação na minha empresa
         </a>
       </div>
@@ -148,30 +163,30 @@
   <section id="authority">
     <div class="container">
       <div class="section-head reveal">
-        <span class="tag">Tecnologia de Ponta</span>
-        <h2 style="margin-top:20px">Não é <span class="accent">chatbot.</span><br>É inteligência comercial.</h2>
-        <p>A Syntra não responde apenas perguntas. Ela entende intenção, conduz a conversa e fecha oportunidades.</p>
+        <span class="tag" data-i18n="auth_tag">Tecnologia de Ponta</span>
+        <h2 style="margin-top:20px" data-i18n="auth_headline">Não é <span class="accent">chatbot.</span><br>É inteligência comercial.</h2>
+        <p data-i18n="auth_sub">A Syntra não responde apenas perguntas. Ela entende intenção, conduz a conversa e fecha oportunidades.</p>
       </div>
       <div class="auth-grid reveal">
         <div class="auth-card">
           <div class="auth-icon">🎯</div>
-          <h3>Atende</h3>
-          <p>Responde instantaneamente qualquer cliente no WhatsApp, 24h por dia, com linguagem natural e contextualizada.</p>
+          <h3 data-i18n="auth_card1_title">Atende</h3>
+          <p data-i18n="auth_card1_text">Responde instantaneamente qualquer cliente no WhatsApp, 24h por dia, com linguagem natural e contextualizada.</p>
         </div>
         <div class="auth-card">
           <div class="auth-icon">🧠</div>
-          <h3>Qualifica</h3>
-          <p>Entende a intenção do cliente, coleta informações e identifica automaticamente se é um lead quente.</p>
+          <h3 data-i18n="auth_card2_title">Qualifica</h3>
+          <p data-i18n="auth_card2_text">Entende a intenção do cliente, coleta informações e identifica automaticamente se é um lead quente.</p>
         </div>
         <div class="auth-card">
           <div class="auth-icon">💰</div>
-          <h3>Vende</h3>
-          <p>Conduz a conversa com técnicas de vendas, contorna objeções e avança o lead para o fechamento.</p>
+          <h3 data-i18n="auth_card3_title">Vende</h3>
+          <p data-i18n="auth_card3_text">Conduz a conversa com técnicas de vendas, contorna objeções e avança o lead para o fechamento.</p>
         </div>
         <div class="auth-card">
           <div class="auth-icon">📧</div>
-          <h3>Envia E-mail</h3>
-          <p>Dispara e-mails personalizados automaticamente após cada interação — follow-up, proposta, confirmação.</p>
+          <h3 data-i18n="auth_card4_title">Envia E-mail</h3>
+          <p data-i18n="auth_card4_text">Dispara e-mails personalizados automaticamente após cada interação — follow-up, proposta, confirmação.</p>
         </div>
       </div>
     </div>
@@ -184,37 +199,37 @@
     <div class="container">
       <div class="pain-grid">
         <div class="pain-text reveal">
-          <span class="tag pain-tag">⚠️ O problema real</span>
-          <h2 style="margin-top:20px">Se você depende de atendimento manual, você está<br><span class="accent">perdendo dinheiro.</span></h2>
-          <p>Cada minuto sem resposta é um cliente indo para o concorrente. A realidade do atendimento manual é brutal.</p>
+          <span class="tag pain-tag" data-i18n="pain_tag">⚠️ O problema real</span>
+          <h2 style="margin-top:20px" data-i18n="pain_headline">Se você depende de atendimento manual, você está<br><span class="accent">perdendo dinheiro.</span></h2>
+          <p data-i18n="pain_sub">Cada minuto sem resposta é um cliente indo para o concorrente. A realidade do atendimento manual é brutal.</p>
         </div>
         <div class="pain-list reveal">
           <div class="pain-item">
             <div class="pain-x">✗</div>
             <div class="pain-item-text">
-              <h4>Clientes sem resposta</h4>
-              <p>Mensagens acumulando enquanto sua equipe está ocupada ou dormindo.</p>
+              <h4 data-i18n="pain_item1_title">Clientes sem resposta</h4>
+              <p data-i18n="pain_item1_text">Mensagens acumulando enquanto sua equipe está ocupada ou dormindo.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-x">✗</div>
             <div class="pain-item-text">
-              <h4>Demora no atendimento</h4>
-              <p>Clientes esperam horas ou dias. Quando você responde, já compraram de outro.</p>
+              <h4 data-i18n="pain_item2_title">Demora no atendimento</h4>
+              <p data-i18n="pain_item2_text">Clientes esperam horas ou dias. Quando você responde, já compraram de outro.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-x">✗</div>
             <div class="pain-item-text">
-              <h4>Leads esfriando</h4>
-              <p>O interesse some rápido. Sem follow-up imediato, a venda não acontece.</p>
+              <h4 data-i18n="pain_item3_title">Leads esfriando</h4>
+              <p data-i18n="pain_item3_text">O interesse some rápido. Sem follow-up imediato, a venda não acontece.</p>
             </div>
           </div>
           <div class="pain-item">
             <div class="pain-x">✗</div>
             <div class="pain-item-text">
-              <h4>Equipe sobrecarregada</h4>
-              <p>Sua equipe gasta energia repetindo as mesmas respostas em vez de fechar negócios.</p>
+              <h4 data-i18n="pain_item4_title">Equipe sobrecarregada</h4>
+              <p data-i18n="pain_item4_text">Sua equipe gasta energia repetindo as mesmas respostas em vez de fechar negócios.</p>
             </div>
           </div>
         </div>
@@ -228,34 +243,34 @@
   <section id="solution">
     <div class="container">
       <div class="section-head reveal">
-        <span class="tag">✅ A Solução</span>
-        <h2 style="margin-top:20px">A Syntra resolve isso<br><span class="accent">automaticamente.</span></h2>
-        <p>Um fluxo completo de atendimento inteligente, do primeiro contato ao fechamento.</p>
+        <span class="tag" data-i18n="sol_tag">✅ A Solução</span>
+        <h2 style="margin-top:20px" data-i18n="sol_headline">A Syntra resolve isso<br><span class="accent">automaticamente.</span></h2>
+        <p data-i18n="sol_sub">Um fluxo completo de atendimento inteligente, do primeiro contato ao fechamento.</p>
       </div>
       <div class="solution-flow reveal">
         <div class="flow-step">
           <div class="flow-num">01</div>
           <div class="flow-icon">💬</div>
-          <h3>IA Atende</h3>
-          <p>Responde na hora, em linguagem natural, sem deixar nenhum cliente esperando.</p>
+          <h3 data-i18n="sol_step1_title">IA Atende</h3>
+          <p data-i18n="sol_step1_text">Responde na hora, em linguagem natural, sem deixar nenhum cliente esperando.</p>
         </div>
         <div class="flow-step">
           <div class="flow-num">02</div>
           <div class="flow-icon">🧠</div>
-          <h3>IA Entende</h3>
-          <p>Analisa a intenção, o contexto e o momento de compra de cada cliente.</p>
+          <h3 data-i18n="sol_step2_title">IA Entende</h3>
+          <p data-i18n="sol_step2_text">Analisa a intenção, o contexto e o momento de compra de cada cliente.</p>
         </div>
         <div class="flow-step">
           <div class="flow-num">03</div>
           <div class="flow-icon">🎯</div>
-          <h3>IA Qualifica</h3>
-          <p>Separa leads frios de quentes e direciona o esforço da equipe com precisão.</p>
+          <h3 data-i18n="sol_step3_title">IA Qualifica</h3>
+          <p data-i18n="sol_step3_text">Separa leads frios de quentes e direciona o esforço da equipe com precisão.</p>
         </div>
         <div class="flow-step">
           <div class="flow-num">04</div>
           <div class="flow-icon">🚀</div>
-          <h3>IA Converte</h3>
-          <p>Conduz o lead até o fechamento e dispara e-mails automáticos de follow-up.</p>
+          <h3 data-i18n="sol_step4_title">IA Converte</h3>
+          <p data-i18n="sol_step4_text">Conduz o lead até o fechamento e dispara e-mails automáticos de follow-up.</p>
         </div>
       </div>
     </div>
@@ -268,13 +283,13 @@
     <div class="container">
       <div class="result-banner reveal">
         <div class="big-stat">100x</div>
-        <h3>Mais capacidade. Sem aumentar sua equipe.</h3>
-        <p>A Syntra pode substituir de <strong>4 a 100 funcionários</strong> de atendimento — atendendo centenas de clientes simultaneamente, sem pausas, sem erros, sem custo fixo por funcionário.</p>
+        <h3 data-i18n="res_headline">Mais capacidade. Sem aumentar sua equipe.</h3>
+        <p data-i18n="res_sub">A Syntra pode substituir de <strong>4 a 100 funcionários</strong> de atendimento — atendendo centenas de clientes simultaneamente, sem pausas, sem erros, sem custo fixo por funcionário.</p>
       </div>
       <div class="result-cards reveal">
-        <div class="rcard"><div class="rnum">↑ 300%</div><p>Aumento médio em leads qualificados</p></div>
-        <div class="rcard"><div class="rnum">0s</div><p>Tempo de espera para o primeiro contato</p></div>
-        <div class="rcard"><div class="rnum">-70%</div><p>Redução no custo de atendimento</p></div>
+        <div class="rcard"><div class="rnum">↑ 300%</div><p data-i18n="res_card1">Aumento médio em leads qualificados</p></div>
+        <div class="rcard"><div class="rnum">0s</div><p data-i18n="res_card2">Tempo de espera para o primeiro contato</p></div>
+        <div class="rcard"><div class="rnum">-70%</div><p data-i18n="res_card3">Redução no custo de atendimento</p></div>
       </div>
     </div>
   </section>
@@ -285,9 +300,9 @@
   <section id="proof">
     <div class="container">
       <div class="section-head reveal">
-        <span class="tag">📱 Prova Real</span>
-        <h2 style="margin-top:20px">Veja a Syntra<br><span class="accent">em ação</span></h2>
-        <p>Conversas reais, resultados reais. Veja como a IA atende e converte no WhatsApp.</p>
+        <span class="tag" data-i18n="proof_tag">📱 Prova Real</span>
+        <h2 style="margin-top:20px" data-i18n="proof_headline">Veja a Syntra<br><span class="accent">em ação</span></h2>
+        <p data-i18n="proof_sub">Conversas reais, resultados reais. Veja como a IA atende e converte no WhatsApp.</p>
       </div>
       <div class="proof-grid reveal">
         <!-- Card 1 -->
@@ -302,7 +317,7 @@
             <div class="msg msg-in">Queria avaliar, quanto custa?<div class="msg-time">14:03</div></div>
             <div class="msg msg-out">Ótimo! A avaliação é gratuita e personalizada. Consigo agendar para você essa semana — tem preferência de dia ou horário?<div class="msg-time">14:03 ✓✓</div></div>
           </div>
-          <div class="syntra-badge">🤖 <span>Atendido por</span> <strong>Syntra IA</strong></div>
+          <div class="syntra-badge" data-i18n="proof_badge">🤖 <span>Atendido por</span> <strong>Syntra IA</strong></div>
         </div>
         <!-- Card 2 -->
         <div class="proof-card">
@@ -342,22 +357,21 @@
   <section id="cta-final">
     <div class="container">
       <div class="reveal">
-        <span class="tag">🚀 Decisão Final</span>
-        <h2 style="margin-top:28px">
+        <span class="tag" data-i18n="cta_final_tag">🚀 Decisão Final</span>
+        <h2 style="margin-top:28px" data-i18n="cta_final_headline">
           Ou você <span class="accent">automatiza…</span>
           <span class="or">ou</span>
           continua perdendo clientes.
         </h2>
-        <p>Cada dia sem a Syntra é mais um dia de clientes sem resposta, leads esfriando e dinheiro escapando. A decisão é agora.</p>
+        <p data-i18n="cta_final_sub">Cada dia sem a Syntra é mais um dia de clientes sem resposta, leads esfriando e dinheiro escapando. A decisão é agora.</p>
         <div class="cta-actions">
           <a class="btn btn-wpp"
              href="https://wa.me/5548988018690?text=Quero+ativar+minha+IA+agora"
              target="_blank"
-             onclick="trackMeta('Purchase', {content_name: 'final_cta', value: 1, currency: 'BRL'})">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+             onclick="trackEvent('Purchase', {content_name: 'final_cta', value: 1, currency: 'BRL'})" data-i18n="cta_final_btn_ativar">
             Ativar minha IA agora
           </a>
-          <a class="btn btn-primary" href="https://wa.me/5548988018690?text=Quero+conhecer+melhor+a+Syntra" target="_blank">
+          <a class="btn btn-primary" href="https://wa.me/5548988018690?text=Quero+conhecer+melhor+a+Syntra" target="_blank" data-i18n="cta_final_btn_conhecer">
             Conhecer a Syntra →
           </a>
         </div>
@@ -370,9 +384,9 @@
       <div class="logo-footer">
         <img src="/src/assets/logo.png" alt="Syntra Logo" class="logo-img-small">
       </div>
-      <p>© 2026 <a href="https://usesyntra.xyz/" target="_blank">Syntra</a> — Inteligência Artificial para negócios reais.</p>
-      <p style="margin-top:5px; font-size:12px; opacity:0.8">Quantum Market LLC — WY, USA</p>
-      <p style="margin-top:10px; font-size:11px; opacity:0.5">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</p>
+      <p data-i18n="footer_text">© 2026 <a href="https://usesyntra.xyz/" target="_blank">Syntra</a> — Inteligência Artificial para negócios reais.</p>
+      <p style="margin-top:5px; font-size:12px; opacity:0.8" data-i18n="footer_company">Quantum Market LLC — WY, USA</p>
+      <p style="margin-top:10px; font-size:11px; opacity:0.5" data-i18n="footer_terms">Ao continuar, você concorda com os <a href="#">Termos de Uso</a> e <a href="#">Política de Privacidade</a>.</p>
     </div>
   </footer>
 
