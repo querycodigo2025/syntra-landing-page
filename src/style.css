@@ -48,7 +48,7 @@ header {
   transition: all 0.3s;
 }
 .header-inner { display: flex; align-items: center; justify-content: space-between; }
-.logo-img { height: 60px; width: auto; }
+.logo-img { height: 48px; width: auto; mix-blend-mode: screen; }
 
 /* Language Selector */
 .lang-selector {
