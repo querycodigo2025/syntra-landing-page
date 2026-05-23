@@ -129,16 +129,39 @@
     <div class="container">
       <div class="vsl-label reveal" data-i18n="vsl_label">📽 Assista antes de decidir</div>
       <div class="vsl-copy reveal">
-        <h2 data-i18n="vsl_headline">Veja em <em>2 minutos</em> como empresas estão automatizando atendimento e aumentando vendas com IA</h2>
+        <h2 data-i18n="vsl_headline">Veja como empresas estão automatizando atendimento e aumentando vendas com IA</h2>
       </div>
+
+      <!-- Player de vídeo real -->
       <div class="vsl-frame reveal">
-        <div class="vsl-placeholder">
-          <button class="vsl-play" onclick="trackEvent('ViewContent', {content_name: 'vsl_play'})">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-          </button>
-          <div class="vsl-duration">▶ 2:14 min — Como a Syntra funciona na prática</div>
+        <video
+          id="vsl-video"
+          class="vsl-player"
+          controls
+          preload="metadata"
+          poster=""
+          playsinline
+          onplay="trackEvent('ViewContent', {content_name: 'vsl_play'})"
+        >
+          <source src="/vsl-syntra.mp4" type="video/mp4" />
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+      </div>
+
+      <!-- CTA pós-vídeo — aparece quando o vídeo termina -->
+      <div class="vsl-post-video" id="vsl-post-cta" style="display:none;">
+        <div class="post-video-inner">
+          <p class="post-video-headline">🎯 Gostou do que viu?</p>
+          <p class="post-video-sub">Fale agora com um especialista e ative a Syntra na sua empresa ainda hoje.</p>
+          <a class="btn btn-wpp btn-lg"
+             href="https://wa.me/5548988018690?text=Assisti+ao+video+e+quero+ativar+a+Syntra+na+minha+empresa"
+             target="_blank"
+             onclick="trackEvent('Lead', {content_name: 'vsl_pos_video_wpp'})">
+            💬 Falar no WhatsApp agora
+          </a>
         </div>
       </div>
+
       <div class="vsl-checklist reveal">
         <div class="vcheck" data-i18n="vsl_check1">Atendimento automático 24h</div>
         <div class="vcheck" data-i18n="vsl_check2">Respostas inteligentes com contexto</div>
@@ -379,6 +402,27 @@
     </div>
   </section>
 
+  <!-- WHATSAPP FINAL STRIP -->
+  <section id="wpp-final">
+    <div class="container">
+      <div class="wpp-final-inner reveal">
+        <div class="wpp-final-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
+        </div>
+        <div class="wpp-final-text">
+          <h2>Pronto para automatizar?</h2>
+          <p>Fale agora com um especialista da Syntra no WhatsApp e ative sua IA hoje.</p>
+        </div>
+        <a class="btn btn-wpp btn-lg wpp-final-btn"
+           href="https://wa.me/5548988018690?text=Quero+ativar+a+Syntra+na+minha+empresa+agora"
+           target="_blank"
+           onclick="trackEvent('Contact', {content_name: 'wpp_final_strip'})">
+          💬 Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="container">
       <div class="logo-footer">
@@ -391,5 +435,20 @@
   </footer>
 
   <script type="module" src="/src/main.js"></script>
+
+  <!-- VSL: mostrar CTA quando vídeo terminar -->
+  <script>
+    const vslVideo = document.getElementById('vsl-video');
+    const vslPostCta = document.getElementById('vsl-post-cta');
+    if (vslVideo && vslPostCta) {
+      vslVideo.addEventListener('ended', function () {
+        vslPostCta.style.display = 'block';
+        vslPostCta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        if (typeof trackEvent === 'function') {
+          trackEvent('Lead', { content_name: 'vsl_ended_cta_shown' });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
