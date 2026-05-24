@@ -27,7 +27,10 @@ function updateLanguage(lang) {
 // Init language
 document.addEventListener('DOMContentLoaded', () => {
   updateLanguage(currentLang);
-  
+
+  // PageView server-side via TrackCore (browser-side já dispara via fbq no <head>)
+  sendToTrackCore('PageView', {}, generateEventId('PageView'));
+
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const lang = btn.getAttribute('data-lang');
@@ -38,24 +41,63 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── TRACKING HELPERS
+
+function getMetaCookies() {
+  const get = (name) => {
+    const m = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+    return m ? m[2] : undefined;
+  };
+  return { fbp: get('_fbp'), fbc: get('_fbc') };
+}
+
+function generateEventId(event) {
+  return `go_${event}_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+}
+
+// Eventos que valem a pena enviar ao CAPI server-side
+const CAPI_EVENTS = new Set(['PageView', 'Lead', 'InitiateCheckout', 'Purchase', 'Contact', 'ViewContent']);
+
+function sendToTrackCore(event, data, eventId) {
+  if (!CAPI_EVENTS.has(event)) return;
+  const { fbp, fbc } = getMetaCookies();
+  const user = {};
+  if (fbp) user.fbp = fbp;
+  if (fbc) user.fbc = fbc;
+
+  fetch('https://trekglobal.usesyntra.xyz/api/track', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      api_key: 'tc_syntra_internal',
+      event_name: event,
+      event_id: eventId,
+      url: window.location.href,
+      ...(Object.keys(user).length ? { user } : {}),
+      custom_data: { ...data, language: currentLang, source: 'go.usesyntra.xyz' },
+    }),
+    keepalive: true,
+  }).catch(() => {});
+}
+
 window.trackEvent = (event, data = {}) => {
   const payload = { ...data, language: currentLang };
-  console.log(`[TRACKING] ${event}`, payload);
+  const eventId = generateEventId(event);
 
-  // Meta Pixel
+  // TrackCore — CAPI server-side (deduplicado com fbq via event_id)
+  sendToTrackCore(event, data, eventId);
+
+  // Meta Pixel — browser-side
   if (typeof fbq !== 'undefined') {
-    fbq('track', event, payload);
+    fbq('track', event, payload, { eventID: eventId });
   }
 
   // Google Analytics & Ads
   if (typeof gtag !== 'undefined') {
-    // GA4 Event
     gtag('event', event, payload);
 
-    // Google Ads Conversion Mapping
     if (event === 'Lead' || event === 'Purchase') {
       gtag('event', 'conversion', {
-        'send_to': 'AW-17046996058/5VesCK3ivMAaENqI0sA_', 
+        'send_to': 'AW-17046996058/5VesCK3ivMAaENqI0sA_',
         'value': 1.0,
         'currency': 'BRL'
       });
