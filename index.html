@@ -391,10 +391,10 @@
           <a class="btn btn-wpp"
              href="https://api.whatsapp.com/send?phone=5548988018690&text=Quero+ativar+minha+IA+agora"
              target="_blank"
-             onclick="trackEvent('Purchase', {content_name: 'final_cta', value: 1, currency: 'BRL'})" data-i18n="cta_final_btn_ativar">
+             onclick="trackEvent('Lead', {content_name: 'final_cta'})" data-i18n="cta_final_btn_ativar">
             Ativar minha IA agora
           </a>
-          <a class="btn btn-primary" href="https://api.whatsapp.com/send?phone=5548988018690&text=Quero+conhecer+melhor+a+Syntra" target="_blank" data-i18n="cta_final_btn_conhecer">
+          <a class="btn btn-primary" href="https://api.whatsapp.com/send?phone=5548988018690&text=Quero+conhecer+melhor+a+Syntra" target="_blank" onclick="trackEvent('Contact', {content_name: 'final_cta_conhecer'})" data-i18n="cta_final_btn_conhecer">
             Conhecer a Syntra →
           </a>
         </div>
