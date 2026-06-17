@@ -28,8 +28,10 @@ function updateLanguage(lang) {
 document.addEventListener('DOMContentLoaded', () => {
   updateLanguage(currentLang);
 
-  // PageView server-side via TrackCore (browser-side já dispara via fbq no <head>)
-  sendToTrackCore('PageView', {}, generateEventId('PageView'));
+  // PageView com mesmo event_id para pixel e CAPI — garante deduplicação no Meta
+  const pvEventId = generateEventId('PageView');
+  if (typeof fbq !== 'undefined') fbq('track', 'PageView', {}, { eventID: pvEventId });
+  sendToTrackCore('PageView', {}, pvEventId);
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
