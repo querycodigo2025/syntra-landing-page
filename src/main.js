@@ -152,6 +152,64 @@ window.addEventListener('scroll', () => {
 
 setTimeout(() => window.trackEvent('ViewContent', {content_name: 'time_30s'}), 30000);
 
+// ── LEAD MODAL — captura nome+email+negócio antes de abrir WhatsApp
+let _pendingWppUrl = '';
+
+window.openLeadModal = function(e, contentName) {
+  if (e) e.preventDefault();
+  _pendingWppUrl = e?.currentTarget?.href || '';
+  const modal = document.getElementById('lead-modal');
+  if (modal) { modal.style.display = 'flex'; modal.dataset.source = contentName || ''; }
+};
+
+window.submitLeadForm = function() {
+  const name    = (document.getElementById('lf-name')?.value || '').trim();
+  const email   = (document.getElementById('lf-email')?.value || '').trim();
+  const problem = (document.getElementById('lf-problem')?.value || '').trim();
+
+  if (!name || !email || !problem) {
+    alert('Por favor, preencha todos os campos.');
+    return;
+  }
+
+  const modal = document.getElementById('lead-modal');
+  const source = modal?.dataset.source || 'modal_whatsapp';
+
+  // Lead real com identidade — email vai para Meta como hash para matching
+  const eventId = generateEventId('Lead');
+  sendToTrackCore('Lead', { content_name: source, name, email, problem }, eventId);
+  if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: source }, { eventID: eventId });
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'Lead', { content_name: source, name, email });
+    gtag('event', 'conversion', { send_to: 'AW-17046996058/5VesCK3ivMAaENqI0sA_', value: 1.0, currency: 'BRL' });
+  }
+
+  if (modal) modal.style.display = 'none';
+
+  // Abre WhatsApp com mensagem personalizada — Sofia já sabe nome e nicho
+  const msg = encodeURIComponent(`Olá! Meu nome é ${name}, tenho um negócio de ${problem} e quero conhecer a Syntra.`);
+  window.open(`https://api.whatsapp.com/send?phone=5548988018690&text=${msg}`, '_blank');
+};
+
+// Intercepta TODOS os cliques em links WhatsApp da página
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a[href*="api.whatsapp.com"]').forEach(link => {
+    // Floating button tem handler próprio (openLeadModal no onclick) — só os demais
+    if (!link.classList.contains('floating-wpp')) {
+      const originalHref = link.href;
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        _pendingWppUrl = originalHref;
+        const modal = document.getElementById('lead-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+          modal.dataset.source = link.dataset.source || link.getAttribute('data-i18n') || 'page_whatsapp';
+        }
+      });
+    }
+  });
+});
+
 // ── VSL INTERACTIONS
 const vslPlay = document.querySelector('.vsl-play');
 if (vslPlay) {

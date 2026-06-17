@@ -52,10 +52,44 @@
 </head>
 <body>
 
+  <!-- MODAL CAPTURA DE LEAD -->
+  <div id="lead-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;padding:16px">
+    <div style="background:#0f0f14;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 28px;max-width:420px;width:100%;position:relative">
+      <button onclick="document.getElementById('lead-modal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#888;font-size:20px;cursor:pointer">✕</button>
+      <div style="font-size:13px;color:#00e676;font-weight:600;letter-spacing:1px;margin-bottom:8px">QUASE LÁ</div>
+      <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 6px">Um especialista vai te atender agora</h3>
+      <p style="font-size:14px;color:#aaa;margin:0 0 24px">Preencha para continuar no WhatsApp:</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <input id="lf-name" type="text" placeholder="Seu nome" autocomplete="name"
+          style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box" />
+        <input id="lf-email" type="email" placeholder="Seu e-mail" autocomplete="email"
+          style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box" />
+        <select id="lf-problem"
+          style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box;-webkit-appearance:none">
+          <option value="" disabled selected>Qual é o seu negócio?</option>
+          <option value="Restaurante / Alimentação">Restaurante / Alimentação</option>
+          <option value="Salão de Beleza / Estética">Salão de Beleza / Estética</option>
+          <option value="Clínica / Saúde">Clínica / Saúde</option>
+          <option value="Educação / Cursos">Educação / Cursos</option>
+          <option value="E-commerce / Loja">E-commerce / Loja</option>
+          <option value="Advocacia / Jurídico">Advocacia / Jurídico</option>
+          <option value="Imobiliário">Imobiliário</option>
+          <option value="Fitness / Personal Trainer">Fitness / Personal Trainer</option>
+          <option value="Serviços Gerais">Serviços Gerais</option>
+          <option value="Outro">Outro</option>
+        </select>
+        <button id="lf-submit" onclick="submitLeadForm()"
+          style="background:linear-gradient(135deg,#00e676,#00b248);border:none;border-radius:8px;padding:14px;color:#000;font-size:15px;font-weight:700;cursor:pointer;width:100%">
+          Continuar no WhatsApp →
+        </button>
+        <p style="font-size:11px;color:#666;text-align:center;margin:0">Seus dados são protegidos. Não enviamos spam.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- FLOATING WHATSAPP -->
-  <a class="floating-wpp" href="https://api.whatsapp.com/send?phone=5548988018690&text=Quero+ativar+a+Syntra+na+minha+empresa"
-     target="_blank" rel="noopener"
-     onclick="trackEvent('Contact', {content_name: 'floating_whatsapp'})">
+  <a class="floating-wpp" href="#" onclick="openLeadModal(event,'floating_whatsapp'); return false;"
+     rel="noopener">
     <div class="wpp-pulse"></div>
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.556 4.118 1.528 5.845L0 24l6.335-1.652A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.003-1.372l-.358-.214-3.761.986.999-3.648-.235-.374A9.798 9.798 0 012.182 12C2.182 6.59 6.59 2.182 12 2.182c5.41 0 9.818 4.408 9.818 9.818 0 5.41-4.408 9.818-9.818 9.818z"/></svg>
     <span>Falar no WhatsApp</span>
