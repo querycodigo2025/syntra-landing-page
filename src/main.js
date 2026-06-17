@@ -79,7 +79,17 @@ function sendToTrackCore(event, data, eventId) {
   }).catch(() => {});
 }
 
+// Contact dedup: mesma localização só dispara UMA vez por sessão
+const _contactTracked = new Set();
+
 window.trackEvent = (event, data = {}) => {
+  // Dedup: Contact com mesmo content_name só uma vez por sessão
+  if (event === 'Contact') {
+    const key = data.content_name || 'generic';
+    if (_contactTracked.has(key)) return;
+    _contactTracked.add(key);
+  }
+
   const payload = { ...data, language: currentLang };
   const eventId = generateEventId(event);
 
@@ -95,7 +105,7 @@ window.trackEvent = (event, data = {}) => {
   if (typeof gtag !== 'undefined') {
     gtag('event', event, payload);
 
-    if (event === 'Lead' || event === 'Purchase') {
+    if (event === 'Lead') {
       gtag('event', 'conversion', {
         'send_to': 'AW-17046996058/5VesCK3ivMAaENqI0sA_',
         'value': 1.0,
@@ -105,7 +115,6 @@ window.trackEvent = (event, data = {}) => {
   }
 };
 
-// Aliases for compatibility with old code if any remains
 window.trackMeta = window.trackEvent;
 
 // ── SCROLL REVEAL
@@ -133,21 +142,13 @@ if (header) {
 let tracked50 = false;
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-  if (pct > 0.5 && !tracked50) { 
-    window.trackEvent('ViewContent', {content_name: 'scroll_50pct'}); 
-    tracked50 = true; 
+  if (pct > 0.5 && !tracked50) {
+    window.trackEvent('ViewContent', {content_name: 'scroll_50pct'});
+    tracked50 = true;
   }
 });
 
 setTimeout(() => window.trackEvent('ViewContent', {content_name: 'time_30s'}), 30000);
-
-// ── WHATSAPP CLICKS
-document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
-  link.addEventListener('click', () => {
-    const location = link.classList.contains('floating-wpp') ? 'floating' : 'page';
-    window.trackEvent('Contact', {content_name: `whatsapp_${location}`});
-  });
-});
 
 // ── VSL INTERACTIONS
 const vslPlay = document.querySelector('.vsl-play');
