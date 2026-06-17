@@ -152,69 +152,107 @@ window.addEventListener('scroll', () => {
 
 setTimeout(() => window.trackEvent('ViewContent', {content_name: 'time_30s'}), 30000);
 
-// ── LEAD MODAL — captura nome+email+negócio antes de abrir WhatsApp
-let _pendingWppUrl = '';
+// ── UTM CAPTURE — lê parâmetros da URL uma vez no carregamento
+const _utms = (() => {
+  const p = new URLSearchParams(window.location.search);
+  return {
+    utm_source:   p.get('utm_source')   || '',
+    utm_medium:   p.get('utm_medium')   || '',
+    utm_campaign: p.get('utm_campaign') || '',
+    landing_page_url: window.location.href,
+  };
+})();
 
+// ── LEAD MODAL — captura nome + WhatsApp obrigatórios, e-mail opcional
 window.openLeadModal = function(e, contentName) {
   if (e) e.preventDefault();
-  _pendingWppUrl = e?.currentTarget?.href || '';
   const modal = document.getElementById('lead-modal');
   if (modal) { modal.style.display = 'flex'; modal.dataset.source = contentName || ''; }
 };
 
-window.submitLeadForm = function() {
-  const name    = (document.getElementById('lf-name')?.value || '').trim();
-  const email   = (document.getElementById('lf-email')?.value || '').trim();
-  const problem = (document.getElementById('lf-problem')?.value || '').trim();
+window.submitLeadForm = async function() {
+  const name  = (document.getElementById('lf-name')?.value  || '').trim();
+  const phone = (document.getElementById('lf-phone')?.value || '').replace(/\D/g, '');
+  const email = (document.getElementById('lf-email')?.value || '').trim();
 
-  if (!name || !email || !problem) {
-    alert('Por favor, preencha todos os campos.');
+  if (!name || phone.length < 10) {
+    alert('Por favor, informe seu nome e WhatsApp com DDD.');
     return;
   }
 
-  const modal = document.getElementById('lead-modal');
-  const source = modal?.dataset.source || 'modal_whatsapp';
+  const btn = document.getElementById('lf-submit');
+  if (btn) { btn.disabled = true; btn.textContent = 'Aguarde...'; }
 
-  // Lead real com identidade — email vai para Meta como hash para matching
+  const modal  = document.getElementById('lead-modal');
+  const source = modal?.dataset.source || 'modal_whatsapp';
+  const { fbp, fbc } = getMetaCookies();
+
+  try {
+    // Salva lead no Syntra AI + dispara evento para TrackCore → Meta CAPI
+    await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4' },
+      body: JSON.stringify({ name, phone, email: email || undefined, ...(_utms), fbp, fbc, source }),
+      keepalive: true,
+    });
+  } catch (_) {}
+
+  // Pixel Meta browser-side (dedup com CAPI via event_id)
   const eventId = generateEventId('Lead');
-  sendToTrackCore('Lead', { content_name: source, name, email, problem }, eventId);
   if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: source }, { eventID: eventId });
   if (typeof gtag !== 'undefined') {
-    gtag('event', 'Lead', { content_name: source, name, email });
+    gtag('event', 'Lead', { content_name: source });
     gtag('event', 'conversion', { send_to: 'AW-17046996058/5VesCK3ivMAaENqI0sA_', value: 1.0, currency: 'BRL' });
   }
 
   if (modal) modal.style.display = 'none';
 
-  // Abre WhatsApp com mensagem personalizada — Sofia já sabe nome e nicho
-  const msg = encodeURIComponent(`Olá! Meu nome é ${name}, tenho um negócio de ${problem} e quero conhecer a Syntra.`);
-  window.open(`https://api.whatsapp.com/send?phone=5548988018690&text=${msg}`, '_blank');
+  // Abre WhatsApp imediatamente — sem nova tela
+  const msg = encodeURIComponent(`Olá! Meu nome é ${name} e quero conhecer a Syntra.`);
+  window.open(`https://wa.me/5548988018690?text=${msg}`, '_blank');
+
+  if (btn) { btn.disabled = false; btn.textContent = 'Continuar para atendimento'; }
 };
 
-// Intercepta TODOS os cliques em links WhatsApp da página
+// Intercepta TODOS os links WhatsApp da página
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('a[href*="api.whatsapp.com"]').forEach(link => {
-    // Floating button tem handler próprio (openLeadModal no onclick) — só os demais
-    if (!link.classList.contains('floating-wpp')) {
-      const originalHref = link.href;
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        _pendingWppUrl = originalHref;
-        const modal = document.getElementById('lead-modal');
-        if (modal) {
-          modal.style.display = 'flex';
-          modal.dataset.source = link.dataset.source || link.getAttribute('data-i18n') || 'page_whatsapp';
-        }
-      });
-    }
+  document.querySelectorAll('a[href*="api.whatsapp.com"], a[href*="wa.me"]').forEach(link => {
+    if (link.classList.contains('floating-wpp')) return;
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const modal = document.getElementById('lead-modal');
+      if (modal) {
+        modal.style.display = 'flex';
+        modal.dataset.source = link.dataset.source || link.getAttribute('data-i18n') || 'page_whatsapp';
+      }
+    });
   });
 });
 
-// ── VSL INTERACTIONS
-const vslPlay = document.querySelector('.vsl-play');
-if (vslPlay) {
-  vslPlay.addEventListener('click', () => {
-    window.trackEvent('ViewContent', {content_name: 'vsl_play'});
-    alert(currentLang === 'pt' ? 'O vídeo VSL será carregado aqui assim que o link estiver disponível.' : 'The VSL video will be loaded here as soon as the link is available.');
+// ── VSL — overlay ao fim do vídeo + botão fixo durante reprodução
+document.addEventListener('DOMContentLoaded', () => {
+  const vslVideo   = document.getElementById('vsl-video');
+  const overlay    = document.getElementById('vsl-end-overlay');
+  const belowBtn   = document.getElementById('vsl-below-btn');
+  const postCta    = document.getElementById('vsl-post-cta');
+
+  if (!vslVideo) return;
+
+  // Botão abaixo aparece quando o vídeo começa
+  vslVideo.addEventListener('play', () => {
+    if (belowBtn) belowBtn.style.display = 'block';
   });
-}
+
+  // Ao fim do vídeo: exibe overlay sobre o player + CTA abaixo
+  vslVideo.addEventListener('ended', () => {
+    if (overlay)  { overlay.style.display  = 'flex'; }
+    if (postCta)  { postCta.style.display  = 'block'; }
+    if (belowBtn) { belowBtn.style.display = 'none'; }
+    window.trackEvent('ViewContent', { content_name: 'vsl_completed' });
+  });
+
+  // Esconde overlay se o usuário clicar em play novamente
+  vslVideo.addEventListener('play', () => {
+    if (overlay) overlay.style.display = 'none';
+  });
+});

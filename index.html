@@ -53,34 +53,22 @@
 <body>
 
   <!-- MODAL CAPTURA DE LEAD -->
-  <div id="lead-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);display:none;align-items:center;justify-content:center;padding:16px">
+  <div id="lead-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);align-items:center;justify-content:center;padding:16px">
     <div style="background:#0f0f14;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:32px 28px;max-width:420px;width:100%;position:relative">
       <button onclick="document.getElementById('lead-modal').style.display='none'" style="position:absolute;top:14px;right:16px;background:none;border:none;color:#888;font-size:20px;cursor:pointer">✕</button>
       <div style="font-size:13px;color:#00e676;font-weight:600;letter-spacing:1px;margin-bottom:8px">QUASE LÁ</div>
-      <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 6px">Um especialista vai te atender agora</h3>
-      <p style="font-size:14px;color:#aaa;margin:0 0 24px">Preencha para continuar no WhatsApp:</p>
+      <h3 style="font-size:20px;font-weight:700;color:#fff;margin:0 0 6px">Fale com um especialista Syntra</h3>
+      <p style="font-size:14px;color:#aaa;margin:0 0 24px">Antes de falar com um especialista Syntra, informe seus dados para que possamos preparar melhor o seu atendimento.</p>
       <div style="display:flex;flex-direction:column;gap:12px">
-        <input id="lf-name" type="text" placeholder="Seu nome" autocomplete="name"
+        <input id="lf-name" type="text" placeholder="Nome *" autocomplete="name"
           style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box" />
-        <input id="lf-email" type="email" placeholder="Seu e-mail" autocomplete="email"
+        <input id="lf-phone" type="tel" placeholder="WhatsApp * (DDD + número)" autocomplete="tel"
           style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box" />
-        <select id="lf-problem"
-          style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#fff;font-size:15px;outline:none;width:100%;box-sizing:border-box;-webkit-appearance:none">
-          <option value="" disabled selected>Qual é o seu negócio?</option>
-          <option value="Restaurante / Alimentação">Restaurante / Alimentação</option>
-          <option value="Salão de Beleza / Estética">Salão de Beleza / Estética</option>
-          <option value="Clínica / Saúde">Clínica / Saúde</option>
-          <option value="Educação / Cursos">Educação / Cursos</option>
-          <option value="E-commerce / Loja">E-commerce / Loja</option>
-          <option value="Advocacia / Jurídico">Advocacia / Jurídico</option>
-          <option value="Imobiliário">Imobiliário</option>
-          <option value="Fitness / Personal Trainer">Fitness / Personal Trainer</option>
-          <option value="Serviços Gerais">Serviços Gerais</option>
-          <option value="Outro">Outro</option>
-        </select>
+        <input id="lf-email" type="email" placeholder="E-mail (opcional)" autocomplete="email"
+          style="background:#1a1a24;border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:12px 14px;color:#aaa;font-size:15px;outline:none;width:100%;box-sizing:border-box" />
         <button id="lf-submit" onclick="submitLeadForm()"
           style="background:linear-gradient(135deg,#00e676,#00b248);border:none;border-radius:8px;padding:14px;color:#000;font-size:15px;font-weight:700;cursor:pointer;width:100%">
-          Continuar no WhatsApp →
+          Continuar para atendimento
         </button>
         <p style="font-size:11px;color:#666;text-align:center;margin:0">Seus dados são protegidos. Não enviamos spam.</p>
       </div>
@@ -167,7 +155,7 @@
       </div>
 
       <!-- Player de vídeo real -->
-      <div class="vsl-frame reveal">
+      <div class="vsl-frame reveal" style="position:relative">
         <video
           id="vsl-video"
           class="vsl-player"
@@ -180,19 +168,35 @@
           <source src="/vsl-syntra.mp4" type="video/mp4" />
           Seu navegador não suporta vídeo HTML5.
         </video>
+
+        <!-- Overlay ao fim do vídeo — sobrepõe o player -->
+        <div id="vsl-end-overlay" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,0.82);border-radius:12px;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:32px;z-index:10">
+          <div style="font-size:13px;color:#00e676;font-weight:600;letter-spacing:1px;margin-bottom:12px">PRÓXIMO PASSO</div>
+          <h3 style="font-size:22px;font-weight:700;color:#fff;margin:0 0 10px;line-height:1.3">Pronto para conhecer o Syntra?</h3>
+          <p style="font-size:14px;color:#bbb;margin:0 0 24px;max-width:320px">Fale agora com um especialista e veja como o Syntra pode ajudar o seu negócio.</p>
+          <button onclick="openLeadModal(event,'vsl_end_overlay')"
+            style="background:linear-gradient(135deg,#00e676,#00b248);border:none;border-radius:8px;padding:14px 28px;color:#000;font-size:15px;font-weight:700;cursor:pointer">
+            💬 Falar com um Especialista
+          </button>
+        </div>
       </div>
 
-      <!-- CTA pós-vídeo — aparece quando o vídeo termina -->
+      <!-- Botão fixo abaixo do vídeo — visível durante toda a reprodução -->
+      <div id="vsl-below-btn" class="reveal" style="text-align:center;margin-top:16px;display:none">
+        <button onclick="openLeadModal(event,'vsl_below_btn')"
+          style="background:transparent;border:2px solid #00e676;border-radius:8px;padding:12px 28px;color:#00e676;font-size:14px;font-weight:600;cursor:pointer;letter-spacing:0.5px">
+          💬 Quero falar com um especialista
+        </button>
+      </div>
+
+      <!-- CTA pós-vídeo abaixo do player (fallback mobile) -->
       <div class="vsl-post-video" id="vsl-post-cta" style="display:none;">
         <div class="post-video-inner">
-          <p class="post-video-headline">🎯 Gostou do que viu?</p>
+          <p class="post-video-headline">Gostou do que viu?</p>
           <p class="post-video-sub">Fale agora com um especialista e ative a Syntra na sua empresa ainda hoje.</p>
-          <a class="btn btn-wpp btn-lg"
-             href="https://api.whatsapp.com/send?phone=5548988018690&text=Assisti+ao+video+e+quero+ativar+a+Syntra+na+minha+empresa"
-             target="_blank"
-             onclick="trackEvent('Lead', {content_name: 'vsl_pos_video_wpp'})">
-            💬 Falar no WhatsApp agora
-          </a>
+          <button class="btn btn-wpp btn-lg" onclick="openLeadModal(event,'vsl_post_cta')">
+            💬 Falar com um Especialista
+          </button>
         </div>
       </div>
 
