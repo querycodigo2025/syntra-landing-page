@@ -191,7 +191,11 @@ window.submitLeadForm = async function() {
     // Salva lead no Syntra AI + dispara evento para TrackCore → Meta CAPI
     await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4' },
+      headers: {
+        'Content-Type':  'application/json',
+        'apikey':        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4',
+      },
       body: JSON.stringify({ name, phone, email: email || undefined, ...(_utms), fbp, fbc, source }),
       keepalive: true,
     });
