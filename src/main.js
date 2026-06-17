@@ -215,7 +215,7 @@ window.submitLeadForm = async function() {
   const msg = encodeURIComponent(`Olá! Meu nome é ${name} e quero conhecer a Syntra.`);
   window.open(`https://wa.me/5548988018690?text=${msg}`, '_blank');
 
-  if (btn) { btn.disabled = false; btn.textContent = 'Continuar para atendimento'; }
+  if (btn) { btn.disabled = false; btn.textContent = 'Continuar para demonstração'; }
 };
 
 // Intercepta TODOS os links WhatsApp da página
