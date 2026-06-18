@@ -188,8 +188,7 @@ window.submitLeadForm = async function() {
   const { fbp, fbc } = getMetaCookies();
 
   try {
-    // Salva lead no Syntra AI + dispara evento para TrackCore → Meta CAPI
-    await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
+    const resp = await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
       method: 'POST',
       headers: {
         'Content-Type':  'application/json',
@@ -197,25 +196,39 @@ window.submitLeadForm = async function() {
         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4',
       },
       body: JSON.stringify({ name, phone, email: email || undefined, ...(_utms), fbp, fbc, source }),
-      keepalive: true,
     });
-  } catch (_) {}
-
-  // Pixel Meta browser-side (dedup com CAPI via event_id)
-  const eventId = generateEventId('Lead');
-  if (typeof fbq !== 'undefined') fbq('track', 'Lead', { content_name: source }, { eventID: eventId });
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'Lead', { content_name: source });
-    gtag('event', 'conversion', { send_to: 'AW-17046996058/5VesCK3ivMAaENqI0sA_', value: 1.0, currency: 'BRL' });
+    if (!resp.ok) console.error('[syntra] lead capture failed', resp.status, await resp.text());
+  } catch (err) {
+    console.error('[syntra] lead capture error', err);
   }
 
-  if (modal) modal.style.display = 'none';
+  // Dispara o evento de Contato indicando que o formulário foi preenchido
+  if (typeof window.trackEvent === 'function') {
+    window.trackEvent('Contact', { content_name: source });
+  }
 
-  // Abre WhatsApp imediatamente — sem nova tela
-  const msg = encodeURIComponent(`Olá! Meu nome é ${name} e quero conhecer a Syntra.`);
-  window.open(`https://wa.me/5548988018690?text=${msg}`, '_blank');
+  // Mostra tela de sucesso — sem opção de fechar, só botão WhatsApp
+  const wppMsg = encodeURIComponent(`Olá! Meu nome é ${name} e quero conhecer a Syntra.`);
+  const wppUrl = `https://wa.me/5548988018690?text=${wppMsg}`;
 
-  if (btn) { btn.disabled = false; btn.textContent = 'Continuar para demonstração'; }
+  if (modal) {
+    modal.innerHTML = `
+      <div style="background:#0f0f14;border-radius:16px;padding:40px 28px;max-width:420px;width:90%;text-align:center;">
+        <div style="font-size:52px;margin-bottom:16px;">🎉</div>
+        <h3 style="color:#fff;font-size:22px;font-weight:700;margin:0 0 14px;">Perfeito, ${name}!</h3>
+        <p style="color:#ccc;font-size:16px;line-height:1.6;margin:0 0 28px;">
+          Agora é só clicar abaixo para se conectar com um especialista Syntra e garantir a sua
+          <strong style="color:#00e676;">demonstração personalizada</strong>.
+        </p>
+        <a href="${wppUrl}" target="_blank" rel="noopener"
+           onclick="window.trackEvent('Lead',{content_name:'whatsapp_pos_form'})"
+           style="display:block;background:#25D366;color:#fff;font-weight:700;font-size:17px;padding:18px 24px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
+          👉 Quero minha demonstração agora
+        </a>
+        <p style="color:#555;font-size:13px;margin:18px 0 0;">🔒 Seus dados estão protegidos.</p>
+      </div>
+    `;
+  }
 };
 
 // Intercepta TODOS os links WhatsApp da página
