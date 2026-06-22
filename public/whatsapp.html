@@ -207,30 +207,33 @@
         gtag('event', 'conversion', { send_to: 'AW-17046996058/5VesCK3ivMAaENqI0sA_', value: 1.0, currency: 'BRL' });
       }
 
-      // Salva lead no Syntra — AGUARDA antes de redirecionar (garante captura em todos os browsers)
+      // Salva lead no Syntra — máximo 1.5s de espera, depois redireciona mesmo assim
       try {
-        await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
-            'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
-          },
-          body: JSON.stringify({
-            name: name,
-            phone: phone,
-            email: email || undefined,
-            source: 'mini_landing_wpp',
-            utm_source:   utms.utm_source,
-            utm_medium:   utms.utm_medium,
-            utm_campaign: utms.utm_campaign,
-            landing_page_url: location.href,
-            fbp: fbp || undefined,
-            fbc: fbc || undefined,
-          }),
-        });
+        await Promise.race([
+          fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
+            },
+            body: JSON.stringify({
+              name: name,
+              phone: phone,
+              email: email || undefined,
+              source: 'mini_landing_wpp',
+              utm_source:   utms.utm_source,
+              utm_medium:   utms.utm_medium,
+              utm_campaign: utms.utm_campaign,
+              landing_page_url: location.href,
+              fbp: fbp || undefined,
+              fbc: fbc || undefined,
+            }),
+          }).catch(function(){}),
+          new Promise(function(r){ setTimeout(r, 1500); })
+        ]);
       } catch (err) {
-        // ignora erro de rede — redireciona mesmo assim
+        // ignora — redireciona mesmo assim
       }
 
       // Redireciona para WhatsApp somente após salvar o lead
