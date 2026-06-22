@@ -1,7 +1,8 @@
 {
   "version": 2,
-  "framework": "vite",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "routes": [
+    { "src": "/whatsapp", "dest": "/whatsapp.html" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
