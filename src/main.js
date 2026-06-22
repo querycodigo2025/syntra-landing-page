@@ -187,19 +187,41 @@ window.submitLeadForm = async function() {
   const source = modal?.dataset.source || 'modal_whatsapp';
   const { fbp, fbc } = getMetaCookies();
 
+  let leadSaved = false;
   try {
-    const resp = await fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
+    const resp = await Promise.race([
+      fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type':  'application/json',
+          'apikey':        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
+        },
+        body: JSON.stringify({ name, phone, email: email || undefined, ...(_utms), fbp, fbc, source }),
+      }),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 3000)),
+    ]);
+    leadSaved = resp.ok;
+    if (!resp.ok) {
+      const txt = await resp.text().catch(() => '');
+      console.error('[syntra] lead capture failed', resp.status, txt);
+    }
+  } catch (err) {
+    console.error('[syntra] lead capture error', err.message);
+  }
+
+  // Se falhou, tenta uma segunda vez em background antes de continuar
+  if (!leadSaved) {
+    fetch('https://ofumwooahtvyyqexqylh.supabase.co/functions/v1/capture-landing-lead', {
       method: 'POST',
       headers: {
         'Content-Type':  'application/json',
-        'apikey':        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM1MTk3MjAsImV4cCI6MjA1OTA5NTcyMH0.ykdOSGFvqBcIzHJFdRJvj2JDhBkpS_EwGEKK9GVxpI4',
+        'apikey':        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9mdW13b29haHR2eXlxZXhxeWxoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ3NDI2NzYsImV4cCI6MjA5MDMxODY3Nn0.yHZGXyhUKdCC2w5_PT9LE4dAz0QHkAnOpO0t_WZMLXM',
       },
       body: JSON.stringify({ name, phone, email: email || undefined, ...(_utms), fbp, fbc, source }),
-    });
-    if (!resp.ok) console.error('[syntra] lead capture failed', resp.status, await resp.text());
-  } catch (err) {
-    console.error('[syntra] lead capture error', err);
+      keepalive: true,
+    }).catch(() => {});
   }
 
   // Dispara o evento de Contato indicando que o formulário foi preenchido
@@ -221,7 +243,7 @@ window.submitLeadForm = async function() {
           <strong style="color:#00e676;">demonstração personalizada</strong>.
         </p>
         <a href="${wppUrl}" target="_blank" rel="noopener"
-           onclick="window.trackEvent('Lead',{content_name:'whatsapp_pos_form'})"
+           onclick="window.trackEvent('Lead',{content_name:'whatsapp_pos_form',name:'${name}',phone:'${phone}'})"
            style="display:block;background:#25D366;color:#fff;font-weight:700;font-size:17px;padding:18px 24px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
           👉 Quero minha demonstração agora
         </a>
